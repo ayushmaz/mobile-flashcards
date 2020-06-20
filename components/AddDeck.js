@@ -6,13 +6,6 @@ class AddDeck extends Component {
     render() {
         return (
             <Container>
-                <Header>
-                    <Left />
-                    <Body>
-                        <Title>Add Deck</Title>
-                    </Body>
-                    <Right />
-                </Header>
                 <Content style={styles.body}>
                     <Form>
                         <H1>what is the title of your new deck?</H1>
