@@ -10,13 +10,11 @@ class DecksPage extends Component {
         const deckID = route.params
         console.log(decks[deckID.deckID])
         return (
-            
             <Container>
-                {console.log("this runs first")}
                 <View style={styles.body}>
                     <H1>{decks[deckID.deckID].deckTitle}</H1>
                     <H3 style={{ marginBottom: 40 }}>{decks[deckID.deckID].questionAnswers.length} cards</H3>
-                    <Button success style={styles.btn} onPress={() => navigation.navigate('AddCard')} ><Text style={styles.btnText} > Add Card </Text></Button>
+                    <Button success style={styles.btn} onPress={() => navigation.navigate('AddCard',{ deckID : deckID.deckID})} ><Text style={styles.btnText} > Add Card </Text></Button>
                     <Button dark style={styles.btn}><Text style={styles.btnText}> Start Quiz </Text></Button>
                     <Button danger style={styles.btn}><Text style={styles.btnText}> Delete Card </Text></Button>
                 </View>
