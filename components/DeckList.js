@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import { View, ListItem, List, Icon } from 'native-base';
 import DecksPage from './DecksPage'
 import { Container, Body, Header, Title, Left, Content, Text, Right, Form, Textarea, Item, Input, Button } from 'native-base';
-import {setInitialData} from '../utils/api'
-import {connect} from 'react-redux'
+import { setInitialData } from '../utils/api'
+import { connect } from 'react-redux'
+import { MaterialIcons } from '@expo/vector-icons';
+import { deleteDeck } from '../actions';
 class DeckList extends Component {
-    
+
     render() {
-        const { navigation , decks} = this.props
+        console.log("Running after delete")
+        const { navigation, decks } = this.props
         const deckList = Object.keys(decks)
+        console.log("DeckList", deckList)
         return (
             <Container>
                 <Content>
@@ -17,12 +21,12 @@ class DeckList extends Component {
                             <ListItem noBorder key={decks[deck].id} >
                                 <Left>
                                     <Body >
-                                        <Text style={{  fontSize: 24, fontWeight: "600" }}>{decks[deck].deckTitle}</Text>
+                                        <Text style={{ fontSize: 24, fontWeight: "600" }}>{decks[deck].deckTitle}</Text>
                                         <Text note>{decks[deck].questionAnswers.length} cards</Text>
                                     </Body>
                                 </Left>
                                 <Right>
-                                    <Icon onPress={()=>navigation.navigate('DecksPage' ,{ deckID :deck })} name="arrow-forward" />
+                                    <Icon style={{ marginRight: 20 }} onPress={() => navigation.navigate('DecksPage', { deckID: deck })} name="arrow-forward" />
                                 </Right>
                             </ListItem>
                         ))}
@@ -33,8 +37,8 @@ class DeckList extends Component {
     }
 }
 
-function mapStateToProps({decks} , {navigation}){
-    return{
+function mapStateToProps({ decks }, { navigation, route }) {
+    return {
         decks,
         navigation
     }

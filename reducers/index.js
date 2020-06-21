@@ -1,7 +1,8 @@
 import {
     ADD_DECK,
     RECEIVE_DECKS,
-    ADD_CARD
+    ADD_CARD,
+    DELETE_DECK
 } from '../actions/index'
 
 export default function decks(state = {}, action) {
@@ -24,9 +25,15 @@ export default function decks(state = {}, action) {
                 "decks": action.decks
             }
 
+        case DELETE_DECK:
+            delete state.decks[action.id.deckID]
+            return {
+                ...state,
+            }
+
         case ADD_CARD:
             const { question, answer, id } = action
-            console.log(id)
+
             const newQuestionAnswer = state.decks[id.deckID].questionAnswers.concat([{
                 question,
                 answer
@@ -38,13 +45,15 @@ export default function decks(state = {}, action) {
                     ...state.decks,
                     [id.deckID]: {
                         ...state.decks[id.deckID],
-                        questionAnswers : state.decks[id.deckID].questionAnswers.concat([{
+                        questionAnswers: state.decks[id.deckID].questionAnswers.concat([{
                             question,
                             answer
                         }])
                     }
                 }
             }
+        default:
+            return state
     }
 
 }
