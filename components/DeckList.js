@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
-import { View, ListItem, List } from 'native-base';
+import { View, ListItem, List, Icon } from 'native-base';
+import DecksPage from './DecksPage'
 import { Container, Body, Header, Title, Left, Content, Text, Right, Form, Textarea, Item, Input, Button } from 'native-base';
+import {setInitialData} from '../utils/api'
+import {connect} from 'react-redux'
 class DeckList extends Component {
-    state = {
-        decks: ["deck1", "deck2", "deck3", "deck4", "deck5","deck1", "deck2", "deck3", "deck4", "deck5", "deck3", "deck4", "deck5"]
-    }
+    
     render() {
-        let i = 1
+        const { navigation , decks} = this.props
+        const deckList = Object.keys(decks)
         return (
             <Container>
                 <Content>
                     <List >
-                        {this.state.decks.map((deck) => (
-                            <ListItem noBorder key={i++} >
-                                <Body >
-                                    <Text style={{alignSelf: "center" , fontSize:24 , fontWeight: "600"}}>{deck.toUpperCase()}</Text>
-                                    <Text style={{alignSelf: "center"}} note>{i} cards</Text>
-                                </Body>
+                        {deckList.map((deck) => (
+                            <ListItem noBorder key={decks[deck].id} >
+                                <Left>
+                                    <Body >
+                                        <Text style={{  fontSize: 24, fontWeight: "600" }}>{decks[deck].deckTitle}</Text>
+                                        <Text note>{decks[deck].questionAnswers.length} cards</Text>
+                                    </Body>
+                                </Left>
+                                <Right>
+                                    <Icon onPress={()=>navigation.navigate('DecksPage' ,{ deckID :deck })} name="arrow-forward" />
+                                </Right>
                             </ListItem>
                         ))}
                     </List>
@@ -26,4 +33,11 @@ class DeckList extends Component {
     }
 }
 
-export default DeckList;
+function mapStateToProps({decks} , {navigation}){
+    return{
+        decks,
+        navigation
+    }
+}
+
+export default connect(mapStateToProps)(DeckList);
