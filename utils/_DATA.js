@@ -38,10 +38,10 @@ function generateUID() {
     return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
 
-function formatDecks({deckTitle}){
+export function formatDeck(deckTitle){
     return {
         deckTitle ,
         id: generateUID(),
-        questionAnswers : [{}]
+        questionAnswers : []
     }
 }

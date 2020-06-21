@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { Content, Header, Body, Left, Right, Title, Container, H1, Form, Item, Input, Button, Text } from 'native-base';
 import { StyleSheet, View } from 'react-native';
 import * as Font from 'expo-font';
+import {formatDeck} from '../utils/_DATA'
+import { connect } from 'react-redux';
+import { addDeck } from '../actions';
 
 
 class AddDeck extends Component {
 
-    state={
-        loading : false
+    state = {
+        loading: false,
     }
 
     async componentDidMount() {
@@ -15,20 +18,33 @@ class AddDeck extends Component {
             'Roboto': require('native-base/Fonts/Roboto.ttf'),
             'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
         })
-        this.setState({loading:true})
+        this.setState({ loading: true })
+    }
+
+    onSubmit = e => {
+        console.log(this.state.term)
+        const newDeck = formatDeck(this.state.term)
+        console.log(newDeck)
+        alert("New Deck Added")
+        const{dispatch} = this.props
+        dispatch(addDeck(newDeck))
     }
 
     render() {
         return (
-            this.state.loading?<Container>
+            this.state.loading ? <Container>
+                {console.log(this.state.term)}
                 <Content style={styles.body}>
-                    <Form>
+                    <Form >
                         <H1>what is the title of your new deck?</H1>
                         <View style={{ height: 30 }}></View>
                         <Item bordered regular>
-                            <Input style={{ borderWidth: 1, borderColor: '#000' }} placeholderTextColor="#6E0000" placeholder='Name of the deck' />
+                            <Input value={this.state.term} onChangeText={val => this.setState({ term: val })} style={{ borderWidth: 1, borderColor: '#000' }} placeholderTextColor="#6E0000" placeholder='Name of the deck' />
                         </Item>
-                        <Button style={styles.btnText} success><Text style={{ fontSize: 16 }}> Submit </Text></Button>
+                        <Button 
+                        disabled={typeof this.state.term === 'undefined' ||  this.state.term === ''} 
+                        onPress={this.onSubmit} style={styles.btnText} 
+                        success><Text style={{ fontSize: 16 }} > Submit </Text></Button>
                     </Form>
                 </Content>
             </Container> : <Text>Loading...</Text>
@@ -51,4 +67,6 @@ const styles = StyleSheet.create({
     }
 
 })
-export default AddDeck;
+
+
+export default connect()(AddDeck);
