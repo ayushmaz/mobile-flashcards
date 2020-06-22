@@ -10,7 +10,8 @@ class AddCard extends Component {
     state = {
         loading: false,
         question: "",
-        answer: ""
+        answer: "",
+        submitted : false
     }
 
     async componentDidMount() {
@@ -19,6 +20,13 @@ class AddCard extends Component {
             'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
         })
         this.setState({ loading: true })
+    }
+
+    onButtonPressed = (e,value) => {
+        this.setState({
+            answer : value,
+            submitted : true
+        })
     }
 
     onSubmitHandler = e => {
@@ -37,7 +45,7 @@ class AddCard extends Component {
     }
     render() {
 
-        const { question, answer } = this.state
+        const { question, answer,submitted } = this.state
         return (
             this.state.loading ? <Container>
                 <Content padder>
@@ -48,14 +56,18 @@ class AddCard extends Component {
                             style={styles.textInput} rowSpan={5}
                             placeholderTextColor="#6E0000"
                             bordered placeholder="Question" />
-                        <Item regular>
-                            <Input
-                                value={answer}
-                                onChangeText={val => this.setState({ answer: val })}
-                                style={{ borderWidth: 1, borderColor: '#000', marginBottom: 30 }}
-                                placeholderTextColor="#6E0000"
-                                placeholder='Answer' />
-                        </Item>
+                        <Text>Please select the answer for this question : </Text>
+                        <Button success
+                            onPress={(e,value) => this.onButtonPressed(e,"correct")}
+                            disabled={submitted === true}
+                            style={{ justifyContent: "center", marginBottom: 20, marginTop: 20 }}
+                        ><Text >Correct</Text></Button>
+                        <Button danger
+                            disabled={submitted === true}
+                            onPress={(e,value) => this.onButtonPressed(e, "incorrect")}
+                            style={{ justifyContent: "center", marginBottom: 20 }}
+                        ><Text>Incorrect</Text></Button>
+                        {submitted === true && <Text>Answer selected , please press submit to add the card</Text>}
                         <Button
                             onPress={this.onSubmitHandler}
                             disabled={typeof question === 'undefined' || question === ""
