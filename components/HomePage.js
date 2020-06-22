@@ -39,5 +39,4 @@ class HomePage extends Component {
         );
     }
 }
-
 export default connect()(HomePage);

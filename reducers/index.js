@@ -26,11 +26,9 @@ export default function decks(state = {}, action) {
             }
 
         case DELETE_DECK:
-            delete state.decks[action.id.deckID]
-            return {
-                ...state,
-            }
-
+            let res = Object.assign({}, state.decks)
+            delete res[action.id.deckID]
+            return res
         case ADD_CARD:
             const { question, answer, id } = action
 

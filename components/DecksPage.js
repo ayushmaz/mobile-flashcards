@@ -25,7 +25,11 @@ class DecksPage extends Component {
                     <H1>{decks[deckID.deckID].deckTitle}</H1>
                     <H3 style={{ marginBottom: 40 }}>{decks[deckID.deckID].questionAnswers.length} cards</H3>
                     <Button success style={styles.btn} onPress={() => navigation.navigate('AddCard',{ deckID : deckID.deckID})} ><Text style={styles.btnText} > Add Card </Text></Button>
-                    <Button dark style={styles.btn}><Text style={styles.btnText}> Start Quiz </Text></Button>
+                    <Button dark 
+                    onPress = {() => navigation.navigate('Quiz' , { deckID : deckID.deckID})}
+                    style={styles.btn}>
+                        <Text style={styles.btnText} > Start Quiz </Text>
+                    </Button>
                     <Button
                     onPress = {this.onDeleteHandler}
                     danger style={styles.btn}><Text style={styles.btnText}> Delete Deck </Text></Button>

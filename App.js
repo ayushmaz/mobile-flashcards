@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import DecksPage from './components/DecksPage';
 import AddCard from './components/AddCard';
@@ -13,6 +13,9 @@ import middleware from './middlewares'
 // import { Button, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import Quiz from './components/Quiz';
+import { setInitialData } from './utils/api';
+import { receiveDecks } from './actions';
 
 // function HomeScreen({ navigation }) {
 //   return (
@@ -65,19 +68,27 @@ function MyStack() {
       <Stack.Screen name="Home" component={HomePage} />
       <Stack.Screen name="DecksPage" component={DecksPage} />
       <Stack.Screen name="AddCard" component={AddCard} />
+      <Stack.Screen name="Quiz" component={Quiz} />
     </Stack.Navigator>
   );
 }
 
-export default function App() {
-  return (
-    <Provider store= {createStore(reducer,middleware)}>
-      <NavigationContainer>
-        <MyStack />
-      </NavigationContainer>
-    </Provider>
-  );
+
+class App extends Component {
+  render() {
+    return (
+      <Provider store={createStore(reducer, middleware)}>
+        <NavigationContainer>
+          <MyStack />
+        </NavigationContainer>
+      </Provider>
+    );
+  }
 }
+
+export default App
+
+
 
 
 const instructions = Platform.select({
