@@ -1,6 +1,7 @@
 import {AsyncStorage} from 'react-native'
 import {decks} from '../utils/_DATA.js'
-import { Notifications, Permissions } from 'expo'
+import { Notifications } from 'expo'
+import * as Permissions from 'expo-permissions'
 const DECKS_STORAGE_KEY = "mobile-flashcards:decks"
 const NOTIFICATION_KEY = "mobile-flashcards:notification"
 
@@ -31,7 +32,6 @@ export async function setDeck(deck){
     }
   
     const deckAfter = await getData()
-    console.log("deckAfter" , deckAfter)
 }
 
 
@@ -79,8 +79,8 @@ export function clearLocalNotification () {
                 let tomorrow = new Date()
                 tomorrow.setDate(tomorrow.getDate() + 1)
                 tomorrow.setHours(21)
-                tomorrow.setMintutes(30)
-  
+                tomorrow.setMinutes(0)
+                
                 Notifications.scheduleLocalNotificationsAsync(
                   createNotification(),
                   {

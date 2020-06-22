@@ -40,7 +40,6 @@ class AddCard extends Component {
             answer : ""
         })
 
-        console.log(navigation)
         navigation.goBack()
     }
     render() {

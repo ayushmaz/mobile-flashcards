@@ -18,7 +18,6 @@ class DecksPage extends Component {
     render() {
         const { navigation, route, decks } = this.props
         const deckID = route.params
-        console.log(decks[deckID.deckID])
         return (
             <Container>
                 <View style={styles.body}>
@@ -30,9 +29,9 @@ class DecksPage extends Component {
                     style={styles.btn}>
                         <Text style={styles.btnText} > Start Quiz </Text>
                     </Button>
-                    <Button
+                    {/* <Button
                     onPress = {this.onDeleteHandler}
-                    danger style={styles.btn}><Text style={styles.btnText}> Delete Deck </Text></Button>
+                    danger style={styles.btn}><Text style={styles.btnText}> Delete Deck </Text></Button> */}
                 </View>
             </Container>
         );

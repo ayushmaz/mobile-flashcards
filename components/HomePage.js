@@ -24,8 +24,6 @@ class HomePage extends Component {
             return <Text>loading</Text>
         }
         const { navigation } = this.props
-        console.log(navigation)
-        console.log(this.props)
         return (
             <Container>
                 <Tabs>

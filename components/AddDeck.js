@@ -23,9 +23,7 @@ class AddDeck extends Component {
     }
 
     onSubmit = async e =>  {
-        console.log(this.state.term)
         const newDeck = formatDeck(this.state.term)
-        console.log(newDeck)
         this.setState({term : ''})
         alert("New Deck Added")
         const{dispatch} = this.props

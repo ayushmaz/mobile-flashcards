@@ -61,8 +61,6 @@ class Quiz extends Component {
             </View>
 
         }
-        //console.log(questions)
-
         if (loading === false) {
             return <Text>Loading...</Text>
         }
