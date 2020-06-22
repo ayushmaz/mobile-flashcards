@@ -5,6 +5,7 @@ import * as Font from 'expo-font';
 import {formatDeck} from '../utils/_DATA'
 import { connect } from 'react-redux';
 import { addDeck } from '../actions';
+import { setDeck } from '../utils/api';
 
 
 class AddDeck extends Component {
@@ -21,7 +22,7 @@ class AddDeck extends Component {
         this.setState({ loading: true })
     }
 
-    onSubmit = e => {
+    onSubmit = async e =>  {
         console.log(this.state.term)
         const newDeck = formatDeck(this.state.term)
         console.log(newDeck)
@@ -29,12 +30,12 @@ class AddDeck extends Component {
         alert("New Deck Added")
         const{dispatch} = this.props
         dispatch(addDeck(newDeck))
+        setDeck(newDeck)
     }
 
     render() {
         return (
             this.state.loading ? <Container>
-                {console.log(this.state.term)}
                 <Content style={styles.body}>
                     <Form >
                         <H1>what is the title of your new deck?</H1>

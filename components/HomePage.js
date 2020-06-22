@@ -4,18 +4,19 @@ import DecksPage from './DecksPage';
 import AddDeck from './AddDeck';
 import DeckList from './DeckList';
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
-import {setInitialData} from '../utils/api'
+import { getData} from '../utils/api'
 import { connect } from 'react-redux';
 import { receiveDecks } from '../actions';
 
 class HomePage extends Component {
+
     state = {
-        loading : true
+        loading: true
     }
 
-    componentDidMount(){
-        const decks = setInitialData()
-        this.props.dispatch(receiveDecks(decks))
+    async componentDidMount() {
+        const decks = await getData()
+        await this.props.dispatch(receiveDecks(decks))
         this.setState({loading : false})
     }
     render() {

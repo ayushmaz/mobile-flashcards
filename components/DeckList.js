@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import { View, ListItem, List, Icon } from 'native-base';
 import DecksPage from './DecksPage'
 import { Container, Body, Header, Title, Left, Content, Text, Right, Form, Textarea, Item, Input, Button } from 'native-base';
-import { setInitialData } from '../utils/api'
+import { setInitialData, getData } from '../utils/api'
 import { connect } from 'react-redux'
 import { MaterialIcons } from '@expo/vector-icons';
-import { deleteDeck } from '../actions';
+import { deleteDeck, receiveDecks } from '../actions';
 class DeckList extends Component {
-
     render() {
-        console.log("Running after delete")
         const { navigation, decks } = this.props
         const deckList = Object.keys(decks)
-        console.log("DeckList", deckList)
         return (
             <Container>
                 <Content>
